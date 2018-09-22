@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+	<title>FlexApp</title>
+</head>
+
+<body>
+	<main id="app">
+		<div class="modal" v-bind:class="{ 'is-active': !isLoggedIn }">
+			<div class="modal-background"></div>
+			<div class="modal-card">
+				<header class="modal-card-head">
+					<p class="modal-card-title"><b>{{ isLoading ? "Loading..." : "Welcome to FlexApp" }}</b></p>
+				</header>
+				<section class="modal-card-body">
+					<h5 class="subtitle is-5">Log in using your FlexTime account.</h5>
+					<div class="field">
+						<label class="label">Username</label>
+						<div class="control">
+							<input class="input" type="text" v-model="username" placeholder="username">
+						</div>
+					</div>
+					<div class="field">
+						<label class="label">Password</label>
+						<div class="control">
+							<input class="input" type="password" v-model="password">
+						</div>
+					</div>
+				</section>
+				<footer class="modal-card-foot">
+					<button class="button is-link" v-bind:class="{ 'is-loading': isLoading }" v-on:click="login">Login</button>
+				</footer>
+			</div>
+		</div>
+		<nav class="navbar is-black" role="navigation" aria-label="main navigation">
+			<div class="navbar-brand">
+				<a class="navbar-item" href="#">
+					<b>FlexApp</b>
+				</a>
+				<span role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="menu">
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+				</span>
+			</div>
+			<div class="navbar-menu" id="menu">
+				<div class="navbar-end">
+					<a class="navbar-item" v-on:click="logout">
+						Logout
+					</a>
+				</div>
+			</div>
+		</nav>
+		<section class="section" v-if="isLoggedIn">
+			<h1 class="title">Appointments</h1>
+			<table class="table is-fullwidth">
+				<thead>
+					<tr>
+						<th>Date</th>
+						<th>Appointment</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="isa-selected" v-for="appointment in appointments">
+						<td>{{ appointment.start }}</td>
+						<td>{{ appointment.title | removeStopWords | capitalize }} &nbsp;<span class="tag is-link" v-if="appointment.teacherEvent">Teacher
+								Created</span></td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+	</main>
+	<style>
+		tr.is-selected {
+			background-color: hsl(48, 100%, 67%) !important;
+			color: black !important;
+			font-weight: bold;
+		}
+	</style>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="index.js"></script>
+
+</html>
