@@ -66,10 +66,33 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr class="isa-selected" v-for="appointment in appointments">
+					<tr class="isa-selected" v-for="appointment in appointmentsSorted">
 						<td>{{ appointment.start }}</td>
 						<td>{{ appointment.title | removeStopWords | capitalize }} &nbsp;<span class="tag is-link" v-if="appointment.teacherEvent">Teacher
 								Created</span></td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		<section class="section" v-if="isLoggedIn">
+			<h1 class="title">Offerings</h1>
+			<table class="table is-fullwidth">
+				<thead>
+					<tr>
+						<th>Date</th>
+						<th>Offering</th>
+						<th>Teacher</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="isa-selected" v-for="offering in offerings">
+						<td>{{ offering.offeringDate }}</td>
+						<td>{{ (offering.offering ? offering.offering : offering.name) | decodeEntities }} &nbsp;
+							<span class="tag is-danger" v-if="offering.numAppts <= 0">Full</span>
+							<span class="tag is-link" v-if="offering.numAppts > 0">Available ({{ offering.numAppts }})</span>
+							<span class="tag is-link" v-if="offering.numAppts === 'N/A'">Available</span>
+						</td>
+						<td>{{ offering.teacherLast }}</td>
 					</tr>
 				</tbody>
 			</table>

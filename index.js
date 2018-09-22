@@ -5,7 +5,8 @@ var app = new Vue({
 		isLoading: false,
 		username: '',
 		password: '',
-		appointments: []
+		appointments: [],
+		offerings: []
 	},
 	computed: {
 		formPayload: () => {
@@ -13,6 +14,11 @@ var app = new Vue({
 				username: app.username,
 				password: app.password
 			}
+		},
+		appointmentsSorted: () => {
+			return app.appointments.sort((a, b) => {
+				return -Date.parse(b.start) + Date.parse(a.start)
+			})
 		}
 	},
 	filters: {
@@ -32,6 +38,11 @@ var app = new Vue({
 			value = value.toString()
 			console.log(value.charAt(0))
 			return value.charAt(0).toUpperCase() + value.slice(1)
+		},
+		decodeEntities: (html) => {
+			var txt = document.createElement("textarea");
+			txt.innerHTML = html;
+			return txt.value;
 		}
 	},
 	methods: {
@@ -48,13 +59,27 @@ var app = new Vue({
 				.then(res => res.json())
 				.then(json => {
 					app.isLoggedIn = true
-					app.isLoading = false
 					app.appointments = json
+				})
+			fetch('https://flextimes.herokuapp.com/irvington/offerings', {
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(app.formPayload)
+			})
+				.then(res => res.json())
+				.then(json => {
+					app.isLoggedIn = true
+					app.isLoading = false
+					app.offerings = json.reverse()
 				})
 		},
 		logout: () => {
 			app.isLoggedIn = false
 			app.appointments = []
+			app.offerings = []
 		}
 	}
 })
