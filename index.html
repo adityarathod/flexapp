@@ -5,11 +5,28 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<link rel="apple-touch-icon" href="touch-icon.png">
+	<link href="ios-splash/iphone5_splash.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+	 rel="apple-touch-startup-image" />
+	<link href="ios-splash/iphone6_splash.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+	 rel="apple-touch-startup-image" />
+	<link href="ios-splash/iphoneplus_splash.png" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)"
+	 rel="apple-touch-startup-image" />
+	<link href="ios-splash/iphonex_splash.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)"
+	 rel="apple-touch-startup-image" />
+	<link href="ios-splash/ipad_splash.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)"
+	 rel="apple-touch-startup-image" />
+	<link href="ios-splash/ipadpro1_splash.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)"
+	 rel="apple-touch-startup-image" />
+	<link href="ios-splash/ipadpro2_splash.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)"
+	 rel="apple-touch-startup-image" />
+	<meta name="apple-mobile-web-app-title" content="FLEX">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
 	<title>FlexApp</title>
 </head>
 
-<body>
+<body ontouchstart="">
 	<main id="app">
 		<div class="modal" v-bind:class="{ 'is-active': !isLoggedIn }">
 			<div class="modal-background"></div>
@@ -103,6 +120,14 @@
 			background-color: hsl(48, 100%, 67%) !important;
 			color: black !important;
 			font-weight: bold;
+		}
+
+		@supports (-webkit-overflow-scrolling: touch) {
+			body {
+				-webkit-user-select: none;
+				-webkit-tap-highlight-color: transparent;
+				-webkit-touch-callout: none;
+			}
 		}
 	</style>
 </body>
