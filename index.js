@@ -40,9 +40,16 @@ var app = new Vue({
 			return value.charAt(0).toUpperCase() + value.slice(1)
 		},
 		decodeEntities: (html) => {
-			var txt = document.createElement("textarea");
-			txt.innerHTML = html;
-			return txt.value;
+			var txt = document.createElement("textarea")
+			txt.innerHTML = html
+			return txt.value
+		},
+		humanizeDate: (dateStr) => {
+			var d = new Date(Date.parse(`${dateStr} 00:00:00`))
+			var month = '' + (d.getMonth() + 1),
+				day = '' + d.getDate(),
+				year = d.getFullYear() - 2000
+			return [month, day, year].join('/')
 		}
 	},
 	methods: {

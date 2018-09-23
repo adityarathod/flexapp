@@ -84,7 +84,7 @@
 				</thead>
 				<tbody>
 					<tr class="isa-selected" v-for="appointment in appointmentsSorted">
-						<td>{{ appointment.start }}</td>
+						<td>{{ appointment.start | humanizeDate }}</td>
 						<td>{{ appointment.title | removeStopWords | capitalize }} &nbsp;<span class="tag is-link" v-if="appointment.teacherEvent">Teacher
 								Created</span></td>
 					</tr>
@@ -103,7 +103,7 @@
 				</thead>
 				<tbody>
 					<tr class="isa-selected" v-for="offering in offerings">
-						<td>{{ offering.offeringDate }}</td>
+						<td>{{ offering.offeringDate | humanizeDate }}</td>
 						<td>{{ (offering.offering ? offering.offering : offering.name) | decodeEntities }} &nbsp;
 							<span class="tag is-danger" v-if="offering.numAppts <= 0">Full</span>
 							<span class="tag is-link" v-if="offering.numAppts > 0">Available ({{ offering.numAppts }})</span>
