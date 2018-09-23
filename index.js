@@ -36,7 +36,6 @@ var app = new Vue({
 		capitalize: (value) => {
 			if (!value) return ''
 			value = value.toString()
-			console.log(value.charAt(0))
 			return value.charAt(0).toUpperCase() + value.slice(1)
 		},
 		decodeEntities: (html) => {
@@ -45,11 +44,7 @@ var app = new Vue({
 			return txt.value
 		},
 		humanizeDate: (dateStr) => {
-			var d = new Date(Date.parse(`${dateStr} 00:00:00`))
-			var month = '' + (d.getMonth() + 1),
-				day = '' + d.getDate(),
-				year = d.getFullYear() - 2000
-			return [month, day, year].join('/')
+			return dayjs(dateStr).format('M/D/YY')
 		}
 	},
 	methods: {
