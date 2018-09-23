@@ -3,10 +3,11 @@ var app = new Vue({
 	data: {
 		isLoggedIn: false,
 		isLoading: false,
-		username: '',
-		password: '',
+		username: localStorage.getItem('username') || '',
+		password: localStorage.getItem('password') || '',
 		appointments: [],
-		offerings: []
+		offerings: [],
+		rememberMe: true
 	},
 	computed: {
 		formPayload: () => {
@@ -75,6 +76,7 @@ var app = new Vue({
 				.then(json => {
 					app.isLoggedIn = true
 					app.isLoading = false
+					storeCredentials()
 					app.offerings = json.reverse()
 				})
 		},
@@ -85,9 +87,19 @@ var app = new Vue({
 			app.username = ''
 			app.password = ''
 		}
-	}
+	},
 })
 
+
+function storeCredentials() {
+	if (app.rememberMe) {
+		localStorage.setItem('username', app.username)
+		localStorage.setItem('password', app.password)
+	} else {
+		localStorage.setItem('username', null)
+		localStorage.setItem('password', null)
+	}
+}
 
 
 // navbar toggle

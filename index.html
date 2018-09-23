@@ -48,6 +48,10 @@
 							<input class="input" type="password" v-model="password" placeholder="password">
 						</div>
 					</div>
+					<label class="checkbox">
+						<input type="checkbox" v-model="rememberMe">
+						Remember me
+					</label>
 				</section>
 				<footer class="modal-card-foot">
 					<button class="button is-link" v-bind:class="{ 'is-loading': isLoading }" v-on:click="login">Login</button>
