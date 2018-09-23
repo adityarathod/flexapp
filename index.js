@@ -21,6 +21,11 @@ var app = new Vue({
 			return app.appointments.sort((a, b) => {
 				return -Date.parse(b.start) + Date.parse(a.start)
 			})
+		},
+		currentOfferings: () => {
+			return app.offerings.filter(appointment => {
+				return !dayjs(appointment.offeringDate).isBefore(dayjs())
+			})
 		}
 	},
 	filters: {
@@ -132,4 +137,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	}
 
+});
+
+document.addEventListener('gesturestart', function (e) {
+	e.preventDefault();
 });
