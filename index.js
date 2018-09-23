@@ -87,6 +87,8 @@ var app = new Vue({
 			app.isLoggedIn = false
 			app.appointments = []
 			app.offerings = []
+			app.username = ''
+			app.password = ''
 		}
 	}
 })
