@@ -7,7 +7,8 @@ var app = new Vue({
 		password: localStorage.getItem('password') || '',
 		appointments: [],
 		offerings: [],
-		rememberMe: true
+		rememberMe: true,
+		showCode: false
 	},
 	computed: {
 		formPayload: () => {
@@ -86,6 +87,10 @@ var app = new Vue({
 			app.offerings = []
 			app.username = ''
 			app.password = ''
+		},
+		renderBarcode: () => {
+			JsBarcode('#idcode', app.username)
+			app.showCode = !app.showCode
 		}
 	},
 })
