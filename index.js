@@ -9,7 +9,7 @@ var app = new Vue({
 		offerings: [],
 		rememberMe: true,
 		showCode: false,
-		version: '1.0.0b11'
+		version: '1.0.0a12'
 	},
 	created: function() {
 		if (this.username && this.password) {
