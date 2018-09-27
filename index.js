@@ -8,7 +8,8 @@ var app = new Vue({
 		appointments: [],
 		offerings: [],
 		rememberMe: true,
-		showCode: false
+		showCode: false,
+		version: '1.0.0b11'
 	},
 	created: function() {
 		if (this.username && this.password) {
