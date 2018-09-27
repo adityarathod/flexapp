@@ -10,26 +10,32 @@ var app = new Vue({
 		rememberMe: true,
 		showCode: false
 	},
+	created: function() {
+		if (this.username && this.password) {
+			console.log('we have creds')
+			this.login()
+		}
+	},
 	computed: {
-		formPayload: () => {
+		formPayload: function() {
 			return {
-				username: app.username,
-				password: app.password
+				username: this.username,
+				password: this.password
 			}
 		},
-		appointmentsSorted: () => {
-			return app.appointments.sort((a, b) => {
+		appointmentsSorted: function() {
+			return this.appointments.sort((a, b) => {
 				return -Date.parse(b.start) + Date.parse(a.start)
 			})
 		},
-		currentOfferings: () => {
-			return app.offerings.filter(appointment => {
+		currentOfferings: function() {
+			return this.offerings.filter(appointment => {
 				return !dayjs(appointment.offeringDate).isBefore(dayjs())
 			})
 		}
 	},
 	filters: {
-		removeStopWords: (value) => {
+		removeStopWords: function(value) {
 			var result = value
 			var stopWords = [
 				{ from: 'You made an ', to: '' },
@@ -40,35 +46,36 @@ var app = new Vue({
 			}
 			return result.trim()
 		},
-		capitalize: (value) => {
+		capitalize: function(value) {
 			if (!value) return ''
 			value = value.toString()
 			return value.charAt(0).toUpperCase() + value.slice(1)
 		},
-		decodeEntities: (html) => {
+		decodeEntities: function(html) {
 			var txt = document.createElement("textarea")
 			txt.innerHTML = html
 			return txt.value
 		},
-		humanizeDate: (dateStr) => {
+		humanizeDate: function(dateStr) {
 			return dayjs(dateStr).format('M/D/YY')
 		}
 	},
 	methods: {
-		login: () => {
-			app.isLoading = true
+		login: function() {
+			var self = this
+			this.isLoading = true
 			fetch('https://flextimes.herokuapp.com/irvington/appointments', {
 				method: 'POST',
 				headers: {
 					'Accept': 'application/json',
 					'Content-Type': 'application/json'
 				},
-				body: JSON.stringify(app.formPayload)
+				body: JSON.stringify(self.formPayload)
 			})
 				.then(res => res.json())
 				.then(json => {
-					app.isLoggedIn = true
-					app.appointments = json
+					self.isLoggedIn = true
+					self.appointments = json
 				})
 			fetch('https://flextimes.herokuapp.com/irvington/offerings', {
 				method: 'POST',
@@ -76,26 +83,26 @@ var app = new Vue({
 					'Accept': 'application/json',
 					'Content-Type': 'application/json'
 				},
-				body: JSON.stringify(app.formPayload)
+				body: JSON.stringify(self.formPayload)
 			})
 				.then(res => res.json())
 				.then(json => {
-					app.isLoggedIn = true
-					app.isLoading = false
+					self.isLoggedIn = true
+					self.isLoading = false
 					storeCredentials()
-					app.offerings = json.reverse()
+					self.offerings = json.reverse()
 				})
 		},
-		logout: () => {
-			app.isLoggedIn = false
-			app.appointments = []
-			app.offerings = []
-			app.username = ''
-			app.password = ''
+		logout: function() {
+			this.isLoggedIn = false
+			this.appointments = []
+			this.offerings = []
+			this.username = ''
+			this.password = ''
 		},
-		renderBarcode: () => {
+		renderBarcode: function() {
 			JsBarcode('#idcode', app.username)
-			app.showCode = !app.showCode
+			this.showCode = !this.showCode
 		}
 	},
 })
@@ -113,7 +120,7 @@ function storeCredentials() {
 
 
 // navbar toggle
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
 
 	// Get all "navbar-burger" elements
 	const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
@@ -123,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		// Add a click event on each of them
 		$navbarBurgers.forEach(el => {
-			el.addEventListener('click', () => {
+			el.addEventListener('click', function() {
 
 				// Get the target from the "data-target" attribute
 				const target = el.dataset.target;
