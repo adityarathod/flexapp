@@ -9,7 +9,7 @@ var app = new Vue({
 		offerings: [],
 		rememberMe: true,
 		showCode: false,
-		version: '1.0.0a12'
+		version: '1.0.0a13'
 	},
 	created: function() {
 		if (this.username && this.password) {
@@ -25,13 +25,22 @@ var app = new Vue({
 			}
 		},
 		appointmentsSorted: function() {
-			return this.appointments.sort((a, b) => {
-				return -Date.parse(b.start) + Date.parse(a.start)
+			var appts = this.appointments.filter(appointment => {
+				return appointment.title.indexOf('Checked in by') === -1
+			})
+			return appts.sort((a, b) => {
+				return dayjs(a.start) - dayjs(b.start)
 			})
 		},
 		currentOfferings: function() {
 			return this.offerings.filter(appointment => {
 				return !dayjs(appointment.offeringDate).isBefore(dayjs())
+			})
+		},
+
+		checkins: function() {
+			return this.appointments.filter(appointment => {
+				return appointment.title.indexOf('Checked in by') !== -1
 			})
 		}
 	},
@@ -77,6 +86,7 @@ var app = new Vue({
 				.then(json => {
 					self.isLoggedIn = true
 					self.appointments = json
+					console.log(json)
 				})
 			fetch('https://flextimes.herokuapp.com/irvington/offerings', {
 				method: 'POST',
