@@ -34,7 +34,12 @@ var app = new Vue({
 		},
 		currentOfferings: function() {
 			return this.offerings.filter(appointment => {
-				return !dayjs(appointment.offeringDate).isBefore(dayjs())
+				var off = dayjs(appointment.offeringDate)
+				var cur = dayjs()
+				if (off.date() === cur.date() && off.month() === cur.month() && off.year() === cur.year()) {
+					return true
+				}
+				return !off.isBefore(dayjs())
 			})
 		},
 
