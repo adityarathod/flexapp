@@ -84,7 +84,6 @@
 				<li v-bind:class="{ 'is-active': currentView === 'appts' }" v-on:click="switchView('appts')"><a>Appointments</a></li>
 				<li v-bind:class="{ 'is-active': currentView === 'offerings' }" v-on:click="switchView('offerings')"><a>Offerings</a></li>
 				<li v-bind:class="{ 'is-active': currentView === 'barcode' }" v-on:click="switchView('barcode')"><a>Barcode</a></li>
-				<!-- <li><a>Documents</a></li> -->
 			</ul>
 		</div>
 
@@ -151,7 +150,8 @@
 					<svg id="idcode" width="100%"></svg>
 				</center>
 			</div>
-			<p><strong>Note:</strong> This barcode is compatible <em>only</em> with the teachers' app, not laser-based scanners.</p>
+			<p><strong>Note:</strong> Teachers can only scan this barcode with the app, <em>not</em> with the laser-based
+				barcode scanners.</p>
 		</section>
 		<footer class="footer has-text-centered" v-show="currentView !== 'barcode'">
 			<p>FlexApp &copy; 2018 <a href="/">AppleCrazy</a>. All rights reserved.</p>
