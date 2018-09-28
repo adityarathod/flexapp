@@ -8,14 +8,14 @@ var app = new Vue({
 		appointments: [],
 		offerings: [],
 		rememberMe: true,
-		version: '1.0.0a19',
-		currentView: 'checkins'
+		version: '1.0.0a20',
+		currentView: localStorage.getItem('lastView') || 'checkins'
 	},
 	created: function () {
 		if (this.username && this.password) {
-			console.log('we have creds')
 			this.login()
 		}
+		JsBarcode('#idcode', this.username)
 	},
 	computed: {
 		formPayload: function () {
@@ -117,7 +117,7 @@ var app = new Vue({
 			this.password = ''
 		},
 		renderBarcode: function () {
-			JsBarcode('#idcode', app.username)
+			JsBarcode('#idcode', this.username)
 		},
 		switchView: function (view) {
 			this.currentView = view
@@ -125,6 +125,8 @@ var app = new Vue({
 			if (view === 'barcode') {
 				this.renderBarcode()
 			}
+
+			localStorage.setItem('lastView', view)
 		}
 	},
 })
