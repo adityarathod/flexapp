@@ -8,8 +8,9 @@ var app = new Vue({
 		appointments: [],
 		offerings: [],
 		rememberMe: true,
-		version: '1.0.0a20',
-		currentView: localStorage.getItem('lastView') || 'checkins'
+		version: '1.0.0a24',
+		currentView: localStorage.getItem('lastView') || 'checkins',
+		error: ''
 	},
 	created: function () {
 		if (this.username && this.password) {
@@ -79,6 +80,7 @@ var app = new Vue({
 		login: function () {
 			var self = this
 			this.isLoading = true
+			var problem = false
 			fetch('https://flextimes.herokuapp.com/irvington/appointments', {
 				method: 'POST',
 				headers: {
@@ -89,9 +91,24 @@ var app = new Vue({
 			})
 				.then(res => res.json())
 				.then(json => {
-					self.isLoggedIn = true
-					self.appointments = json
-					console.log(json)
+					if ('error' in json) {
+						problem = true
+						self.isLoading = false
+						switch (json.error) {
+							case 'INVALID_CREDENTIALS':
+								self.error = 'Your username/password is incorrect.'
+								break
+							case 'MISSING_CREDENTIALS':
+								self.error = 'Please enter in a username and password.'
+								break
+							default:
+								self.error = 'We have no idea what happened.'
+						}
+					} else {
+						self.error = null
+						self.isLoggedIn = true
+						self.appointments = json
+					}
 				})
 			fetch('https://flextimes.herokuapp.com/irvington/offerings', {
 				method: 'POST',
@@ -103,6 +120,9 @@ var app = new Vue({
 			})
 				.then(res => res.json())
 				.then(json => {
+					if (problem) {
+						return
+					}
 					self.isLoggedIn = true
 					self.isLoading = false
 					storeCredentials()

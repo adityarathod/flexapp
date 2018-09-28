@@ -36,6 +36,9 @@
 				</header>
 				<section class="modal-card-body">
 					<h5 class="subtitle is-5">Log in using your FlexTime account.</h5>
+					<div class="notification is-danger" v-if="error">
+						{{ error }}
+					</div>
 					<div class="field">
 						<label class="label">Username</label>
 						<div class="control">
@@ -212,6 +215,6 @@
  crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/barcodes/JsBarcode.code39.min.js" integrity="sha384-kJekHWjsWr1Ub9BLZKy5jpCEs7qvYRqipbKNUxndSIl5wy6tW3y5g3/bC3fKs7Jn"
  crossorigin="anonymous"></script>
-<script src="index.js?a=20"></script>
+<script src="index.js?a=24"></script>
 
 </html>
