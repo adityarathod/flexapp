@@ -48,7 +48,7 @@
 							<input class="input" type="password" v-model="password" placeholder="password">
 						</div>
 					</div>
-					<label class="checkbox">
+					<label class="checkbox" v-show="!isLoading">
 						<input type="checkbox" v-model="rememberMe">
 						Remember me
 					</label>
