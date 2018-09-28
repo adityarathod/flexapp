@@ -32,7 +32,7 @@
 			<div class="modal-background"></div>
 			<div class="modal-card">
 				<header class="modal-card-head">
-					<p class="modal-card-title"><b>{{ isLoading ? "Loading...this may take a bit." : "Welcome to FlexApp" }}</b></p>
+					<p class="modal-card-title"><b>{{ isLoading ? "Loading..." : "Welcome to FlexApp" }}</b></p>
 				</header>
 				<section class="modal-card-body">
 					<h5 class="subtitle is-5">Log in using your FlexTime account.</h5>
@@ -61,7 +61,7 @@
 		<nav class="navbar is-black" role="navigation" aria-label="main navigation">
 			<div class="navbar-brand">
 				<a class="navbar-item" href="#">
-					<b>FlexApp</b>
+					<b>FLEX</b>
 				</a>
 				<span role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="menu">
 					<span aria-hidden="true"></span>
@@ -86,21 +86,21 @@
 			</center>
 		</div>
 		<section class="section" v-if="isLoggedIn">
-				<h1 class="title">Check-Ins</h1>
-				<div class="card" v-for="checkins in checkins">
-					<div class="card-content">
-						<h6 class="subtitle is-6">
-							{{ checkins.start | humanizeDate }}
-							&nbsp;
-							<span class="tag is-link" v-show="checkins.teacherEvent">Teacher
-								Created</span>
-						</h6>
-						<h5 class="title is-6">
-							{{ checkins.title | removeStopWords | capitalize }}
-						</h5>
-					</div>
+			<h1 class="title">Check-Ins</h1>
+			<div class="card" v-for="checkins in checkins">
+				<div class="card-content">
+					<h6 class="subtitle is-6">
+						{{ checkins.start | humanizeDate }}
+						&nbsp;
+						<span class="tag is-link" v-show="checkins.teacherEvent">Teacher
+							Created</span>
+					</h6>
+					<h5 class="title is-6">
+						{{ checkins.title | removeStopWords | capitalize }}
+					</h5>
 				</div>
-			</section>
+			</div>
+		</section>
 		<section class="section" v-if="isLoggedIn">
 			<h1 class="title">All Appointments</h1>
 			<div class="card" v-for="appointment in appointmentsSorted">
