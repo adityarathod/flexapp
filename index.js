@@ -8,23 +8,23 @@ var app = new Vue({
 		appointments: [],
 		offerings: [],
 		rememberMe: true,
-		showCode: false,
-		version: '1.0.0a13'
+		version: '1.0.0a19',
+		currentView: 'checkins'
 	},
-	created: function() {
+	created: function () {
 		if (this.username && this.password) {
 			console.log('we have creds')
 			this.login()
 		}
 	},
 	computed: {
-		formPayload: function() {
+		formPayload: function () {
 			return {
 				username: this.username,
 				password: this.password
 			}
 		},
-		appointmentsSorted: function() {
+		appointmentsSorted: function () {
 			var appts = this.appointments.filter(appointment => {
 				return appointment.title.indexOf('Checked in by') === -1
 			})
@@ -32,7 +32,7 @@ var app = new Vue({
 				return dayjs(a.start) - dayjs(b.start)
 			})
 		},
-		currentOfferings: function() {
+		currentOfferings: function () {
 			return this.offerings.filter(appointment => {
 				var off = dayjs(appointment.offeringDate)
 				var cur = dayjs()
@@ -43,14 +43,14 @@ var app = new Vue({
 			})
 		},
 
-		checkins: function() {
+		checkins: function () {
 			return this.appointments.filter(appointment => {
 				return appointment.title.indexOf('Checked in by') !== -1
 			})
 		}
 	},
 	filters: {
-		removeStopWords: function(value) {
+		removeStopWords: function (value) {
 			var result = value
 			var stopWords = [
 				{ from: 'You made an ', to: '' },
@@ -61,22 +61,22 @@ var app = new Vue({
 			}
 			return result.trim()
 		},
-		capitalize: function(value) {
+		capitalize: function (value) {
 			if (!value) return ''
 			value = value.toString()
 			return value.charAt(0).toUpperCase() + value.slice(1)
 		},
-		decodeEntities: function(html) {
+		decodeEntities: function (html) {
 			var txt = document.createElement("textarea")
 			txt.innerHTML = html
 			return txt.value
 		},
-		humanizeDate: function(dateStr) {
+		humanizeDate: function (dateStr) {
 			return dayjs(dateStr).format('M/D/YY')
 		}
 	},
 	methods: {
-		login: function() {
+		login: function () {
 			var self = this
 			this.isLoading = true
 			fetch('https://flextimes.herokuapp.com/irvington/appointments', {
@@ -109,16 +109,22 @@ var app = new Vue({
 					self.offerings = json.reverse()
 				})
 		},
-		logout: function() {
+		logout: function () {
 			this.isLoggedIn = false
 			this.appointments = []
 			this.offerings = []
 			this.username = ''
 			this.password = ''
 		},
-		renderBarcode: function() {
+		renderBarcode: function () {
 			JsBarcode('#idcode', app.username)
-			this.showCode = !this.showCode
+		},
+		switchView: function (view) {
+			this.currentView = view
+
+			if (view === 'barcode') {
+				this.renderBarcode()
+			}
 		}
 	},
 })
@@ -136,7 +142,7 @@ function storeCredentials() {
 
 
 // navbar toggle
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
 
 	// Get all "navbar-burger" elements
 	const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
@@ -146,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		// Add a click event on each of them
 		$navbarBurgers.forEach(el => {
-			el.addEventListener('click', function() {
+			el.addEventListener('click', function () {
 
 				// Get the target from the "data-target" attribute
 				const target = el.dataset.target;

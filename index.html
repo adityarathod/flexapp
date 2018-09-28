@@ -71,21 +71,24 @@
 			</div>
 			<div class="navbar-menu" id="menu">
 				<div class="navbar-end">
-					<a class="navbar-item" v-on:click="renderBarcode">
-						Check-in Code
-					</a>
 					<a class="navbar-item" v-on:click="logout">
 						<b>Logout</b>
 					</a>
 				</div>
 			</div>
 		</nav>
-		<div class="container-fluid" v-show="showCode">
-			<center>
-				<svg id="idcode" width="100%"></svg>
-			</center>
+
+		<div class="tabs is-fullwidth is-small is-centered" v-if="isLoggedIn">
+			<ul>
+				<li v-bind:class="{ 'is-active': currentView === 'checkins' }" v-on:click="switchView('checkins')"><a>Check-Ins</a></li>
+				<li v-bind:class="{ 'is-active': currentView === 'appts' }" v-on:click="switchView('appts')"><a>Appointments</a></li>
+				<li v-bind:class="{ 'is-active': currentView === 'offerings' }" v-on:click="switchView('offerings')"><a>Offerings</a></li>
+				<li v-bind:class="{ 'is-active': currentView === 'barcode' }" v-on:click="switchView('barcode')"><a>Barcode</a></li>
+				<!-- <li><a>Documents</a></li> -->
+			</ul>
 		</div>
-		<section class="section" v-if="isLoggedIn">
+
+		<section class="section" v-if="isLoggedIn && currentView === 'checkins'">
 			<h1 class="title">Check-Ins</h1>
 			<div class="card" v-for="checkins in checkins">
 				<div class="card-content">
@@ -101,7 +104,7 @@
 				</div>
 			</div>
 		</section>
-		<section class="section" v-if="isLoggedIn">
+		<section class="section" v-if="isLoggedIn && currentView === 'appts'">
 			<h1 class="title">All Appointments</h1>
 			<div class="card" v-for="appointment in appointmentsSorted">
 				<div class="card-content">
@@ -117,7 +120,7 @@
 				</div>
 			</div>
 		</section>
-		<section class="section" v-if="isLoggedIn">
+		<section class="section" v-if="isLoggedIn && currentView === 'offerings'">
 			<h1 class="title">Current Offerings</h1>
 			<div class="card" v-for="offering in currentOfferings">
 				<div class="card-content">
@@ -142,7 +145,14 @@
 				</div>
 			</div>
 		</section>
-		<footer class="footer has-text-centered">
+		<section class="section" v-show="isLoggedIn && currentView === 'barcode'">
+			<div class="container-fluid">
+				<center>
+					<svg id="idcode" width="100%"></svg>
+				</center>
+			</div>
+		</section>
+		<footer class="footer has-text-centered" v-show="currentView !== 'barcode'">
 			<p>FlexApp &copy; 2018 <a href="/">AppleCrazy</a>. All rights reserved.</p>
 			<p>Version {{ version }}</p>
 		</footer>
@@ -163,9 +173,27 @@
 			margin-bottom: 20px;
 		}
 
+		svg {
+			width: 100%;
+		}
+
+		li {
+			height: 50px;
+		}
+
+		li>a {
+			height: 100%;
+		}
+
 		@media screen and (max-width: 768px) {
 			.card-content {
 				text-align: center;
+			}
+		}
+
+		@media screen and (max-width: 768px) {
+			svg {
+				height: auto;
 			}
 		}
 
@@ -185,6 +213,6 @@
  crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/barcodes/JsBarcode.code39.min.js" integrity="sha384-kJekHWjsWr1Ub9BLZKy5jpCEs7qvYRqipbKNUxndSIl5wy6tW3y5g3/bC3fKs7Jn"
  crossorigin="anonymous"></script>
-<script src="index.js?a=13"></script>
+<script src="index.js?a=19"></script>
 
 </html>
