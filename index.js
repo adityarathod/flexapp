@@ -25,17 +25,31 @@ var app = new Vue({
 				password: this.password
 			}
 		},
-		appointmentsSorted: function () {
+		currentAppointmentsSorted: function () {
 			var appts = this.appointments.filter(appointment => {
-				return appointment.title.indexOf('Checked in by') === -1
+				var offDate = dayjs(appointment.start),
+					curDate = dayjs()
+				var isSameDay = (
+					offDate.date() === curDate.date() &&
+					offDate.month() === curDate.month() &&
+					offDate.year() === curDate.year()
+				)
+				var isCurrent = isSameDay || !offDate.isBefore(curDate)
+				return appointment.title.indexOf('Checked in by') === -1 && isCurrent
 			})
-			return appts.sort((a, b) => {
-				return dayjs(a.start) - dayjs(b.start)
+			return this.sortAppointments(appts)
+		},
+		oldAppointmentsSorted: function () {
+			var appts = this.appointments.filter(appointment => {
+				var offDate = dayjs(appointment.start),
+					curDate = dayjs()
+				return appointment.title.indexOf('Checked in by') === -1 && offDate.isBefore(curDate)
 			})
+			return this.sortAppointments(appts)
 		},
 		currentOfferings: function () {
-			return this.offerings.filter(appointment => {
-				var off = dayjs(appointment.offeringDate)
+			return this.offerings.filter(offering => {
+				var off = dayjs(offering.offeringDate)
 				var cur = dayjs()
 				if (off.date() === cur.date() && off.month() === cur.month() && off.year() === cur.year()) {
 					return true
@@ -147,6 +161,11 @@ var app = new Vue({
 			}
 
 			localStorage.setItem('lastView', view)
+		},
+		sortAppointments: function (apptsArr) {
+			return apptsArr.sort((a, b) => {
+				return dayjs(a.start) - dayjs(b.start)
+			})
 		}
 	},
 })

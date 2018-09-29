@@ -107,8 +107,23 @@
 			</div>
 		</section>
 		<section class="section no-top-padding" v-if="isLoggedIn && currentView === 'appts'">
-			<h1 class="title has-text-centered">All Appointments</h1>
-			<div class="card" v-for="appointment in appointmentsSorted">
+			<h1 class="title has-text-centered">Current Appointments</h1>
+			<div class="card" v-for="appointment in currentAppointmentsSorted">
+				<div class="card-content">
+					<h6 class="subtitle is-6">
+						{{ appointment.start | humanizeDate }}
+						&nbsp;
+						<span class="tag is-link" v-show="appointment.teacherEvent">Teacher
+							Created</span>
+					</h6>
+					<h5 class="title is-6">
+						{{ appointment.title | removeStopWords | capitalize }}
+					</h5>
+				</div>
+			</div>
+			<br><br><br>
+			<h1 class="title has-text-centered">Old Appointments</h1>
+			<div class="card" v-for="appointment in oldAppointmentsSorted">
 				<div class="card-content">
 					<h6 class="subtitle is-6">
 						{{ appointment.start | humanizeDate }}
