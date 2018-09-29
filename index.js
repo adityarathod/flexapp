@@ -134,10 +134,11 @@ var app = new Vue({
 			})
 				.then(res => res.json())
 				.then(json => {
-					if (problem) {
+					if (problem || json === null) {
 						return
 					}
 					self.isLoggedIn = true
+					self.error = null
 					self.isLoading = false
 					storeCredentials()
 					self.offerings = json.reverse()

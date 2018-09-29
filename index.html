@@ -81,7 +81,7 @@
 			</div>
 		</nav>
 
-		<div class="tabs is-fullwidth is-small is-centered" v-if="isLoggedIn">
+		<div class="tabs is-fullwidth is-small is-centered" v-if="isLoggedIn && !error">
 			<ul>
 				<li v-bind:class="{ 'is-active': currentView === 'appts' }" v-on:click="switchView('appts')"><a>Appointments</a></li>
 				<li v-bind:class="{ 'is-active': currentView === 'offerings' }" v-on:click="switchView('offerings')"><a>Offerings</a></li>
@@ -90,7 +90,7 @@
 			</ul>
 		</div>
 
-		<section class="section no-top-padding" v-if="isLoggedIn && currentView === 'checkins'">
+		<section class="section no-top-padding" v-if="isLoggedIn && currentView === 'checkins' && !error">
 			<h1 class="title has-text-centered">Check-Ins</h1>
 			<div class="card" v-for="checkins in checkins">
 				<div class="card-content">
@@ -106,7 +106,7 @@
 				</div>
 			</div>
 		</section>
-		<section class="section no-top-padding" v-if="isLoggedIn && currentView === 'appts'">
+		<section class="section no-top-padding" v-if="isLoggedIn && currentView === 'appts' && !error">
 			<h1 class="title has-text-centered">Current Appointments</h1>
 			<div class="card" v-for="appointment in currentAppointmentsSorted">
 				<div class="card-content">
@@ -137,7 +137,7 @@
 				</div>
 			</div>
 		</section>
-		<section class="section no-top-padding" v-if="isLoggedIn && currentView === 'offerings'">
+		<section class="section no-top-padding" v-if="isLoggedIn && currentView === 'offerings' && !error">
 			<h1 class="title has-text-centered">Current Offerings</h1>
 			<div class="card" v-for="offering in currentOfferings">
 				<div class="card-content">
@@ -162,7 +162,7 @@
 				</div>
 			</div>
 		</section>
-		<section class="section no-top-padding" v-show="isLoggedIn && currentView === 'barcode'">
+		<section class="section no-top-padding" v-show="isLoggedIn && currentView === 'barcode' && !error">
 			<div class="container-fluid">
 				<center>
 					<svg id="idcode" width="100%"></svg>
@@ -171,7 +171,11 @@
 			<p><strong>Note:</strong> Teachers can only scan this barcode with the app, <em>not</em> with the laser-based
 				barcode scanners.</p>
 		</section>
-		<footer class="footer has-text-centered" v-show="currentView !== 'barcode'">
+
+		<section class="section">
+			<p><strong>Error:</strong> Maximum login attempts exceeded</p>
+		</section>
+		<footer class="footer has-text-centered" v-show="currentView !== 'barcode' && !error">
 			<p>FlexApp &copy; 2018 <a href="/">AppleCrazy</a>. All rights reserved.</p>
 			<p>Version {{ version }}</p>
 		</footer>
