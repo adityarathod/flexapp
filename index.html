@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="apple-mobile-web-app-capable" content="yes">
-	<link rel="apple-touch-icon" href="apple-touch.png?v=34">
+	<link rel="apple-touch-icon" href="apple-touch.png?v=31">
 	<link href="ios-splash/iphone5_splash.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
 	 rel="apple-touch-startup-image" />
 	<link href="ios-splash/iphone6_splash.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
@@ -94,12 +94,14 @@
 			<h1 class="title has-text-centered">Check-Ins</h1>
 			<div class="card" v-for="checkins in checkins">
 				<div class="card-content">
-					<h6 class="subtitle is-6">
-						{{ checkins.start | humanizeDate }}
-						&nbsp;
-						<span class="tag is-link" v-show="checkins.teacherEvent">Teacher
-							Created</span>
-					</h6>
+					<div class="columns is-mobile" width="100%">
+						<div class="column">
+							<div class="tags has-addons" style="justify-content: center;">
+								<span class="tag">Date</span>
+								<span class="tag is-dark">{{ checkins.start | humanizeDate }}</span>
+							</div>
+						</div>
+					</div>
 					<h5 class="title is-6">
 						{{ checkins.title | removeStopWords | capitalize }}
 					</h5>
@@ -110,12 +112,18 @@
 			<h1 class="title has-text-centered">Current Appointments</h1>
 			<div class="card" v-for="appointment in currentAppointmentsSorted">
 				<div class="card-content">
-					<h6 class="subtitle is-6">
-						{{ appointment.start | humanizeDate }}
-						&nbsp;
-						<span class="tag is-link" v-show="appointment.teacherEvent">Teacher
-							Created</span>
-					</h6>
+					<div class="columns is-mobile" width="100%">
+						<div class="column">
+							<div class="tags has-addons" v-bind:style="{'justify-content': !appointment.teacherEvent ? 'center': 'flex-start'}">
+								<span class="tag">Date</span>
+								<span class="tag is-dark">{{ appointment.start | humanizeDate }}</span>
+							</div>
+						</div>
+						<div class="column has-text-right" v-if="appointment.teacherEvent">
+							<span class="tag is-link">Teacher
+								Created</span>
+						</div>
+					</div>
 					<h5 class="title is-6">
 						{{ appointment.title | removeStopWords | capitalize }}
 					</h5>
@@ -125,12 +133,18 @@
 			<h1 class="title has-text-centered">Old Appointments</h1>
 			<div class="card" v-for="appointment in oldAppointmentsSorted">
 				<div class="card-content">
-					<h6 class="subtitle is-6">
-						{{ appointment.start | humanizeDate }}
-						&nbsp;
-						<span class="tag is-link" v-show="appointment.teacherEvent">Teacher
-							Created</span>
-					</h6>
+					<div class="columns is-mobile" width="100%">
+						<div class="column">
+							<div class="tags has-addons" v-bind:style="{'justify-content': !appointment.teacherEvent ? 'center': 'flex-start'}">
+								<span class="tag">Date</span>
+								<span class="tag is-dark">{{ appointment.start | humanizeDate }}</span>
+							</div>
+						</div>
+						<div class="column has-text-right" v-if="appointment.teacherEvent">
+							<span class="tag is-link">Teacher
+								Created</span>
+						</div>
+					</div>
 					<h5 class="title is-6">
 						{{ appointment.title | removeStopWords | capitalize }}
 					</h5>
@@ -172,7 +186,7 @@
 				barcode scanners.</p>
 		</section>
 
-		<section class="section" v-show="error">
+		<section class="section" v-if="error">
 			<p><strong>Error:</strong> Maximum login attempts exceeded</p>
 		</section>
 		<footer class="footer has-text-centered" v-show="currentView !== 'barcode' && !error">
@@ -181,8 +195,14 @@
 		</footer>
 	</main>
 	<style>
+		html {
+			background-color: black;
+		}
+
 		body {
 			overflow-x: hidden;
+			overscroll-behavior-y: none;
+			background-color: white;
 		}
 
 		.no-top-padding {
@@ -234,6 +254,6 @@
  crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/barcodes/JsBarcode.code39.min.js" integrity="sha384-kJekHWjsWr1Ub9BLZKy5jpCEs7qvYRqipbKNUxndSIl5wy6tW3y5g3/bC3fKs7Jn"
  crossorigin="anonymous"></script>
-<script src="index.js?a=24"></script>
+<script src="index.js?a=31"></script>
 
 </html>

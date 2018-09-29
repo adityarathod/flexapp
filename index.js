@@ -8,7 +8,7 @@ var app = new Vue({
 		appointments: [],
 		offerings: [],
 		rememberMe: true,
-		version: '1.0.0a24',
+		version: '1.0.0a31',
 		currentView: localStorage.getItem('lastView') || 'checkins',
 		error: ''
 	},
