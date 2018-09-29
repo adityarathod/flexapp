@@ -122,6 +122,7 @@ var app = new Vue({
 						self.error = null
 						self.isLoggedIn = true
 						self.appointments = json
+						self.renderBarcode()
 					}
 				})
 			fetch('https://flextimes.herokuapp.com/irvington/offerings', {
