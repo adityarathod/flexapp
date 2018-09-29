@@ -172,7 +172,7 @@
 				barcode scanners.</p>
 		</section>
 
-		<section class="section">
+		<section class="section" v-show="error">
 			<p><strong>Error:</strong> Maximum login attempts exceeded</p>
 		</section>
 		<footer class="footer has-text-centered" v-show="currentView !== 'barcode' && !error">
