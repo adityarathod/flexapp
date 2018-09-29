@@ -83,9 +83,9 @@
 
 		<div class="tabs is-fullwidth is-small is-centered" v-if="isLoggedIn">
 			<ul>
-				<li v-bind:class="{ 'is-active': currentView === 'checkins' }" v-on:click="switchView('checkins')"><a>Check-Ins</a></li>
 				<li v-bind:class="{ 'is-active': currentView === 'appts' }" v-on:click="switchView('appts')"><a>Appointments</a></li>
 				<li v-bind:class="{ 'is-active': currentView === 'offerings' }" v-on:click="switchView('offerings')"><a>Offerings</a></li>
+				<li v-bind:class="{ 'is-active': currentView === 'checkins' }" v-on:click="switchView('checkins')"><a>Check-Ins</a></li>
 				<li v-bind:class="{ 'is-active': currentView === 'barcode' }" v-on:click="switchView('barcode')"><a>Barcode</a></li>
 			</ul>
 		</div>
