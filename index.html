@@ -81,6 +81,39 @@
 			</div>
 		</nav>
 
+		<div class="modal" v-bind:class="{ 'is-active': confirmationActive }">
+			<div class="modal-background" v-on:click="confirmationActive = false"></div>
+			<div class="modal-card">
+				<header class="modal-card-head">
+					<p class="modal-card-title"><b>Confirm Appointment?</b></p>
+				</header>
+				<section class="modal-card-body">
+					<h5 class="subtitle is-5">{{ currentAppointmentTitle || 'Flex Time' }}</h5>
+					<p>with {{ currentAppointmentTeacher }} on {{ currentAppointment.startDate | humanizeDate }}</p>
+					<hr>
+					<div class="field">
+						<label class="label">Comments</label>
+						<div class="control">
+							<div class="select">
+								<select v-model="currentAppointmentComment">
+									<option selected="" disabled="">Add a comment</option>
+									<option>I have a few questions.</option>
+									<option value="I need help.">I need help.</option>
+									<option value="I want to work with a friend.">I want to work with a friend.</option>
+									<option value="I want to help others.">I want to help others.</option>
+									<option value="No comment.">No comment.</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</section>
+				<footer class="modal-card-foot has-text-right">
+					<button class="button" v-on:click="confirmationActive = false" v-if="!isLoading">Cancel</button>
+					<button class="button is-link" v-bind:class="{ 'is-loading': isLoading }" v-on:click="createOfferingAppt">Confirm</button>
+				</footer>
+			</div>
+		</div>
+
 		<div class="tabs is-fullwidth is-small is-centered" v-if="isLoggedIn && !error">
 			<ul>
 				<li v-bind:class="{ 'is-active': currentView === 'appts' }" v-on:click="switchView('appts')"><a>Appointments</a></li>
@@ -172,7 +205,7 @@
 						{{ (offering.offering ? offering.offering : offering.name) | decodeEntities }}
 					</h5>
 					<h6 class="subtitle is-6">Offered by {{ offering.teacherLast }}</h6>
-
+					<button class="button is-dark" v-if="offering.numAppts > 0 || offering.numAppts === 'N/A'" v-on:click="displayConfirmationModal(offering.teacherID, offering.offeringEvent, offering.offeringDate, (offering.offering ? offering.offering : offering.name))">Schedule</button>
 				</div>
 			</div>
 		</section>

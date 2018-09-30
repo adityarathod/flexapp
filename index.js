@@ -10,7 +10,13 @@ var app = new Vue({
 		rememberMe: true,
 		version: '1.0.0a31',
 		currentView: localStorage.getItem('lastView') || 'checkins',
-		error: ''
+		error: '',
+		currentAppointment: {},
+		currentAppointmentTeacher: '',
+		currentAppointmentTitle: '',
+		currentAppointmentComment: '',
+		confirmationActive: false,
+		teacherMapping: []
 	},
 	created: function () {
 		if (this.username && this.password) {
@@ -91,6 +97,32 @@ var app = new Vue({
 		}
 	},
 	methods: {
+		refreshAppts: function () {
+			var self = this
+			return fetch('https://flextimes.herokuapp.com/irvington/appointments', {
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(self.formPayload)
+			}).then(res => res.json()).then(json => {
+				if ('error' in json) {
+					switch (json.error) {
+						case 'INVALID_CREDENTIALS':
+							self.error = 'Your username/password is incorrect.'
+							break
+						case 'MISSING_CREDENTIALS':
+							self.error = 'Please enter in a username and password.'
+							break
+						default:
+							self.error = 'We have no idea what happened.'
+					}
+				} else {
+					self.appointments = json
+				}
+			})
+		},
 		login: function () {
 			var self = this
 			this.isLoading = true
@@ -144,6 +176,11 @@ var app = new Vue({
 					storeCredentials()
 					self.offerings = json.reverse()
 				})
+			fetch('https://flextimes.herokuapp.com/irvington/teachers')
+				.then(res => res.json())
+				.then(obj => {
+					self.teacherMapping = obj
+				})
 		},
 		logout: function () {
 			this.isLoggedIn = false
@@ -168,6 +205,45 @@ var app = new Vue({
 			return apptsArr.sort((a, b) => {
 				return dayjs(a.start) - dayjs(b.start)
 			})
+		},
+		createOfferingAppt: function () {
+			var payload = {
+				...this.currentAppointment,
+				username: this.username,
+				password: this.password,
+				comments: this.currentAppointmentComment ? this.currentAppointmentComment : ''
+			}
+			console.log(payload)
+			var self = this
+			this.isLoading = true
+			fetch('https://flextimes.herokuapp.com/irvington/makeAppointment', {
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(payload)
+			})
+				.catch(err => console.log(err))
+				.then(res => {
+					self.refreshAppts().then(() => {
+						self.isLoading = false
+						self.confirmationActive = false
+						self.switchView('appts')
+						document.body.scrollTop = 0
+						document.documentElement.scrollTop = 0
+					})
+				})
+		},
+		displayConfirmationModal: function (teacherID, offeringType, offeringDate, offeringTitle) {
+			this.currentAppointment = {
+				teacherID: teacherID,
+				startDate: offeringDate,
+				eventNum: offeringType,
+			}
+			this.confirmationActive = true
+			this.currentAppointmentTeacher = this.teacherMapping.filter(itm => itm.val === teacherID).map(itm => itm.txt).join('')
+			this.currentAppointmentTitle = offeringTitle
 		}
 	},
 })
