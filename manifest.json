@@ -1,0 +1,20 @@
+{
+	"short_name": "FLEX",
+	"icons": [
+		{
+			"src": "android-192.png",
+			"type": "image/png",
+			"sizes": "192x192"
+		},
+		{
+			"src": "android-512.png",
+			"type": "image/png",
+			"sizes": "512x512"
+		}
+	],
+	"start_url": "/flexapp?v=34",
+	"background_color": "#FFFFFF",
+	"display": "standalone",
+	"scope": "/flexapp/",
+	"theme_color": "#000000"
+}
