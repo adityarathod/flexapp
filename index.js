@@ -16,7 +16,13 @@ var app = new Vue({
 		currentAppointmentTitle: '',
 		currentAppointmentComment: '',
 		confirmationActive: false,
-		teacherMapping: []
+		teacherMapping: [],
+		newAppointment: {
+			active: false,
+			date: dayjs().format('YYYY-MM-DD'),
+			selectedTeacher: null,
+			comment: ''
+		}
 	},
 	created: function () {
 		if (this.username && this.password) {
@@ -213,7 +219,6 @@ var app = new Vue({
 				password: this.password,
 				comments: this.currentAppointmentComment ? this.currentAppointmentComment : ''
 			}
-			console.log(payload)
 			var self = this
 			this.isLoading = true
 			fetch('https://flextimes.herokuapp.com/irvington/makeAppointment', {
@@ -234,6 +239,41 @@ var app = new Vue({
 						document.documentElement.scrollTop = 0
 					})
 				})
+		},
+		createNewAppt: function () {
+			var payload = {
+				username: this.username,
+				password: this.password,
+				comments: this.newAppointment.comment,
+				teacherID: this.newAppointment.selectedTeacher,
+				startDate: this.newAppointment.date,
+				eventNum: 1
+			}
+			var self = this
+			this.isLoading = true
+			fetch('https://flextimes.herokuapp.com/irvington/makeAppointment', {
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(payload)
+			})
+				.catch(err => console.log(err))
+				.then(res => {
+					self.refreshAppts().then(() => {
+						self.isLoading = false
+						self.newAppointment.active = false
+						self.switchView('appts')
+						document.body.scrollTop = 0
+						document.documentElement.scrollTop = 0
+					})
+				})
+		},
+		resetAppointmentModal: function () {
+			this.newAppointment.date = dayjs().format('YYYY-MM-DD')
+			this.newAppointment.selectedTeacher = null
+			this.newAppointment.comment = ''
 		},
 		displayConfirmationModal: function (teacherID, offeringType, offeringDate, offeringTitle) {
 			this.currentAppointment = {
