@@ -1,3 +1,9 @@
+/*
+* index.js
+* (C) 2018 Aditya Rathod. All rights reserved.
+* This file cannot be redistributed without permission.
+*/
+
 var app = new Vue({
 	el: '#app',
 	data: {
@@ -8,7 +14,8 @@ var app = new Vue({
 		appointments: [],
 		offerings: [],
 		rememberMe: true,
-		version: '1.0.0a34',
+		// beta starts at commit 41
+		version: '1.0.0-beta1',
 		currentView: localStorage.getItem('lastView') || 'checkins',
 		error: '',
 		currentAppointment: {},
