@@ -284,6 +284,36 @@ var app = new Vue({
 			this.confirmationActive = true
 			this.currentAppointmentTeacher = this.teacherMapping.filter(itm => itm.val === teacherID).map(itm => itm.txt).join('')
 			this.currentAppointmentTitle = offeringTitle
+		},
+		deleteAppointment: function (appt) {
+			var payload = {
+				username: this.username,
+				password: this.password,
+				apptID: appt.uniqueID
+			}
+			this.isLoading = true
+			var self = this
+			if (appt.teacherEvent === 1) {
+				alert('Sorry, you can\'t delete teacher-created appointments.')
+				this.isLoading = false
+			} else {
+				fetch('https://flextimes.herokuapp.com/irvington/deleteAppointment', {
+					method: 'POST',
+					headers: {
+						'Accept': 'application/json',
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(payload)
+				})
+					.catch(err => console.log(err))
+					.then(_res => {
+						self.refreshAppts().then(() => {
+							self.isLoading = false
+							document.body.scrollTop = 0
+							document.documentElement.scrollTop = 0
+						})
+					})
+			}
 		}
 	},
 })

@@ -204,6 +204,8 @@
 					<h5 class="title is-6">
 						{{ appointment.title | removeStopWords | capitalize }}
 					</h5>
+					<button class="button is-danger" v-bind:class="{ 'is-loading': isLoading }" v-on:click="deleteAppointment(appointment)"
+					 v-if="!appointment.teacherEvent">Delete</button>
 				</div>
 			</div>
 			<br><br><br>
