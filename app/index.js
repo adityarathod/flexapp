@@ -221,7 +221,9 @@ var app = new Vue({
 		},
 		createOfferingAppt: function () {
 			var payload = {
-				...this.currentAppointment,
+				teacherID: this.currentAppointment.teacherID,
+				startDate: this.currentAppointment.startDate,
+				eventNum: this.currentAppointment.eventNum,
 				username: this.username,
 				password: this.password,
 				comments: this.currentAppointmentComment ? this.currentAppointmentComment : ''
@@ -341,7 +343,7 @@ function storeCredentials() {
 document.addEventListener('DOMContentLoaded', function () {
 
 	// Get all "navbar-burger" elements
-	const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+	var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
 	// Check if there are any navbar burgers
 	if ($navbarBurgers.length > 0) {
@@ -351,8 +353,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			el.addEventListener('click', function () {
 
 				// Get the target from the "data-target" attribute
-				const target = el.dataset.target;
-				const $target = document.getElementById(target);
+				var target = el.dataset.target;
+				var $target = document.getElementById(target);
 
 				// Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
 				el.classList.toggle('is-active');
@@ -374,4 +376,15 @@ if ('serviceWorker' in navigator) {
 	}).catch(function (err) {
 		console.warn('Error whilst registering service worker', err);
 	});
+}
+
+function iOSVersion() {
+	if (/iP(hone|od|ad)/.test(navigator.platform)) {
+		var v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
+		return [parseInt(v[1], 10), parseInt(v[2], 10), parseInt(v[3] || 0, 10)];
+	}
+}
+
+if (iOSVersion() && iOSVersion()[0] < 11) {
+	alert('This app does not support iOS versions before iOS 11. A fix is coming soon, but in the meantime, please update your phone.')
 }
