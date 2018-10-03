@@ -12,9 +12,8 @@
 			"sizes": "512x512"
 		}
 	],
-	"start_url": "/flexapp/app/?v=beta1",
+	"start_url": ".",
 	"background_color": "#FFFFFF",
 	"display": "standalone",
-	"scope": "/flexapp/app",
 	"theme_color": "#000000"
 }
