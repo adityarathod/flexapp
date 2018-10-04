@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 
 import './Login.scss';
 import logoWhite from '../logoWhite.svg';
@@ -9,10 +10,12 @@ class Login extends Component {
 		super();
 		this.state = {
 			username: '',
-			password: ''
+			password: '',
+			isLoading: false
 		}
 		this.changeUsername = this.changeUsername.bind(this)
 		this.changePassword = this.changePassword.bind(this)
+		this.login = this.login.bind(this)
 	}
 	changeUsername(e) {
 		this.setState({
@@ -25,7 +28,7 @@ class Login extends Component {
 		});
 	}
 	login() {
-
+		stateWrapper.login(this.state.username, this.state.password)
 	}
 	render() {
 		return (
@@ -50,7 +53,7 @@ class Login extends Component {
 								<input className="input" type="password" value={this.state.password} onChange={this.changePassword} placeholder="password" />
 							</div>
 						</div>
-						<button className="button is-link">Login</button>
+						<button className={classNames('button', 'is-white', { 'is-loading': this.state.isLoading })} onClick={this.login}>Login</button>
 					</div>
 				</div>
 			</div>
