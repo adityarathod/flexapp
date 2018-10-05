@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 import './IntroHero.scss';
 
-import logoWhite from '../logoWhite.svg';
-
 class IntroHero extends Component {
   render() {
     return (
@@ -13,7 +11,7 @@ class IntroHero extends Component {
             <div className="container">
               <div className="navbar-brand">
                 <p className="navbar-item">
-                  <img src={logoWhite} width="25%" alt="FLEX logo" />
+                  <img src="logoWhite.svg" width="25%" alt="FLEX logo" />
                 </p>
               </div>
             </div>

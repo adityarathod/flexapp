@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Route } from 'react-router-dom';
 
-import Login from '../Login/Login';
 import IntroView from '../IntroView/IntroView';
+import Home from '../Home/Home';
 
 class App extends Component {
   render() {
@@ -10,7 +10,7 @@ class App extends Component {
       <Router>
         <main>
           <Route exact path="/" component={IntroView} />
-          <Route path="/login" component={Login} />
+          <Route path="/home" component={Home} />
         </main>
       </Router>
     );
