@@ -1,0 +1,31 @@
+.OnboardingWelcome-buttonContainer {
+    margin-top: calc(100vh - 200px);
+    position: fixed;
+    z-index: 1000000;
+    width: 100%;
+}
+
+.OnboardingWelcome-blueButton {
+    width: 85%;
+    height: 49px;
+    background: #007AFF;
+    font-family: 'Inter UI';
+    font-weight: 400;
+    border-radius: 10px;
+}
+
+.OnboardingWelcome-heroBody {
+    justify-content: center;
+}
+
+.OnboardingWelcome-subtitle {
+    font-family: 'Inter UI';
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+@media screen and (min-width: 769px) {
+    .OnboardingWelcome-blueButton {
+        width: 463px;
+    }
+}
