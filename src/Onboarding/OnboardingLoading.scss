@@ -1,0 +1,10 @@
+@keyframes pulse-loading {
+    from {color: #ababab;}
+    to {color: #868686;}
+}
+
+.OnboardingLoading-loadingIndicator {
+	font-family: 'Inter UI';
+	animation: 3s infinite alternate pulse-loading;
+	font-weight: bold;
+}

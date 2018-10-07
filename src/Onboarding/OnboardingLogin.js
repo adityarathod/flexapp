@@ -16,8 +16,8 @@ class OnboardingLogin extends Component {
 							<h2 className="subtitle OnboardingLogin-subtitle">Log in using your FlexTime account.</h2>
 							<br />
 							<br />
-							<input type="text" className="input" placeholder="username" style={{ boxShadow: 'none', marginBottom: '14px' }} />
-							<input type="password" className="input" placeholder="password" style={{ boxShadow: 'none' }} />
+							<input type="text" className="input OnboardingLogin-input" placeholder="username" style={{ marginBottom: '14px' }} />
+							<input type="password" className="input OnboardingLogin-input" placeholder="password" />
 							<br /> <br />
 							<br />
 							<Link to="/home/onboard-loading" style={{ fontSize: '18px', fontFamily: 'Inter UI', fontWeight: '500' }}>
