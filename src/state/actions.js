@@ -13,10 +13,15 @@ export function deleteAppt() {
 	return
 }
 
-export function login() {
-	return
+export function login(username, password) {
+	return {
+		type: LOGIN,
+		credentials: { username: username, password: password }
+	}
 }
 
 export function logout() {
-	return
+	return {
+		type: LOGOUT
+	}
 }
