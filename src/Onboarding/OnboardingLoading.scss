@@ -1,10 +1,10 @@
 @keyframes pulse-loading {
-    from {color: #ababab;}
-    to {color: #868686;}
+    from {color: #dddddd;}
+    to {color: #6b6b6b;}
 }
 
 .OnboardingLoading-loadingIndicator {
-	font-family: 'Inter UI';
+	font-family: -apple-system, BlinkMacSystemFont, 'Inter UI';
 	animation: 3s infinite alternate pulse-loading;
 	font-weight: bold;
 }
