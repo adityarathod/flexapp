@@ -18,7 +18,7 @@ class OnboardingWelcome extends Component {
 					<div className="hero-body OnboardingWelcome-heroBody">
 						<div className="has-text-centered" style={{ width: '100%' }}>
 							<h1 className="subtitle OnboardingWelcome-subtitle">welcome to</h1>
-							<img src="logo.svg" width="100" />
+							<img src="logo.svg" width="100" alt="FLEX logo" />
 							<br />
 							<br />
 							<br />

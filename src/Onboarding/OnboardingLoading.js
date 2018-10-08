@@ -15,7 +15,7 @@ class OnboardingLoading extends Component {
 						<span className="is-light OnboardingLoading-loadingIndicator">Logging you in...</span>
 					</div>
 				</div>
-			</div >
+			</div>
 		)
 	}
 }
