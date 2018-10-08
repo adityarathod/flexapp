@@ -14,7 +14,7 @@ class IntroInstallInstructions extends Component {
 				gives you easier access to the app.</li>
                 </ul>
                 <br />
-                <Link to="/home/welcome" className="button is-medium is-link">Launch App &rarr;</Link>
+                <Link to="/onboarding" className="button is-medium is-link">Launch App &rarr;</Link>
             </section>
         )
     }

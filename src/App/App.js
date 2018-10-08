@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { HashRouter as Router, Route } from 'react-router-dom';
 
 import IntroView from '../IntroView/IntroView';
-import Home from '../Home/Home';
+import Onboarding from '../Onboarding/Onboarding';
 
 class App extends Component {
   render() {
@@ -10,7 +10,7 @@ class App extends Component {
       <Router>
         <main>
           <Route exact path="/" component={IntroView} />
-          <Route path="/home" component={Home} />
+          <Route path="/onboarding" component={Onboarding} />
         </main>
       </Router>
     );

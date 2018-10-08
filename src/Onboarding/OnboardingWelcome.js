@@ -8,7 +8,7 @@ class OnboardingWelcome extends Component {
 		return (
 			<React.Fragment>
 				<div className="has-text-centered OnboardingWelcome-buttonContainer">
-					<Link to="/home/onboard-2">
+					<Link to="/onboarding/2">
 						<button className="button is-link OnboardingWelcome-blueButton">
 							Get Started
 						</button>

@@ -20,7 +20,7 @@ class OnboardingLogin extends Component {
 							<input type="password" className="input OnboardingLogin-input" placeholder="password" />
 							<br /> <br />
 							<br />
-							<Link to="/home/onboard-loading" style={{ fontSize: '18px', fontFamily: 'Inter UI', fontWeight: '500' }}>
+							<Link to="/onboarding/3" style={{ fontSize: '18px', fontFamily: 'Inter UI', fontWeight: '500' }}>
 								Login
 							</Link>
 						</div>

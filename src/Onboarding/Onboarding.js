@@ -9,9 +9,9 @@ class Onboarding extends Component {
 	render() {
 		return (
 			<React.Fragment>
-				<Route path="/home/welcome" component={OnboardingWelcome} />
-				<Route path="/home/onboard-2" component={OnboardingLogin} />
-				<Route path="/home/onboard-loading" component={OnboardingLoading} />
+				<Route path="/onboarding/2" component={OnboardingLogin} />
+				<Route path="/onboarding/3" component={OnboardingLoading} />
+				<Route path="/onboarding" component={OnboardingWelcome} />
 			</React.Fragment>
 		)
 	}
