@@ -193,9 +193,6 @@
 		</section>
 		<section class="section no-top-padding" v-if="isLoggedIn && currentView === 'appts' && !error">
 			<h1 class="title has-text-centered">Current Appointments</h1>
-			<div class="notification is-danger">
-  				<strong>Note:</strong> There is no FLEX movement on Wednesday, October 10 due to the PSAT. Please do not schedule appointments for that date.
-			</div>
 			<button class="button is-link" v-on:click="newAppointment.active = true">New Appointment</button>
 			<div class="card" v-for="appointment in currentAppointmentsSorted">
 				<div class="card-content">
@@ -242,9 +239,6 @@
 		</section>
 		<section class="section no-top-padding" v-if="isLoggedIn && currentView === 'offerings' && !error">
 			<h1 class="title has-text-centered">Current Offerings</h1>
-			<div class="notification is-danger">
-  				<strong>Note:</strong> There is no FLEX movement on Wednesday, October 10 due to the PSAT. Please do not schedule appointments for that date.
-			</div>
 			<div class="card" v-for="offering in currentOfferings">
 				<div class="card-content">
 					<div class="columns is-mobile" width="100%">
