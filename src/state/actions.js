@@ -5,8 +5,17 @@ export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
 
 
-export function newAppt() {
-	return
+export function newAppt(isOffering, comment = '', teacherID, startDate, eventNum = 1) {
+	return {
+		type: 'NEW_APPT',
+		appointmentData: {
+			isOffering: isOffering,
+			comment: comment,
+			teacherID: teacherID,
+			startDate: startDate,
+			eventNum: eventNum
+		}
+	}
 }
 
 export function deleteAppt() {
