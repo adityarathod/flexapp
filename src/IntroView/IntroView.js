@@ -16,10 +16,10 @@ class IntroView extends Component {
     return (
       <div>
           <IntroHero />
-          <IntroSidebar title="Why use FLEX?" text="FLEX is a brand-new app that lets you do anything that the FlexTime website does. FLEX is free, and you don't have
-			to wait for an app to install!" />
+        <IntroInstallInstructions />
       <IntroScreenshots images={[{title: 'Browse offerings', data: screen1}, {title: 'Create appointments', data: screen2}, {title: 'Check in with a tap', data: screen3}]} />
-      <IntroInstallInstructions />
+       <IntroSidebar title="Why use FLEX?" text="FLEX is a brand-new app that lets you do anything that the FlexTime website does. FLEX is free, and you don't have
+			to wait for an app to install!" />
       <AppFooter />
       </div>
     );
