@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 
 import ScreenHeader from './ScreenHeader';
 import AppointmentCard from './AppointmentCard';
+import TabBar from './TabBar';
 
 class Home extends Component {
 	render() {
@@ -16,11 +17,7 @@ class Home extends Component {
 						<AppointmentCard title="Chemistry and Physics Help" subtitle="Wednesday, December 20" color="linear-gradient(125.18deg, #885AFF 0.83%, #1749E5 98.75%)" />
 						<AppointmentCard title="We The People &#x000D; Practice" subtitle="Thursday, December 21" color="linear-gradient(125.18deg, #00C8C8 0.83%, #0A9EC4 98.75%)" />
 					</div>
-					<div style={{
-						position: 'fixed', background: 'rgba(248, 248, 248, 0.92)', backdropFilter: 'blur(21.87px)', left: '0px', bottom: '0px', width: '100%', height: '50px'
-					}}>
-						hi
-					</div>
+					<TabBar currentTab="today" />
 				</div>
 			</section>
 		)
