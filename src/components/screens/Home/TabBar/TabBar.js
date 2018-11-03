@@ -7,6 +7,8 @@ import DiscoverActive from './DiscoverActive.svg';
 import Checkins from './Checkins.svg';
 import CheckinsActive from './CheckinsActive.svg';
 
+import { changeTab } from '../../../../state/actions';
+import { connect } from 'react-redux';
 
 var tabStyle = {
 	position: 'fixed',
@@ -23,24 +25,23 @@ var tabStyle = {
 }
 
 const TabBar = props => {
-	var currentTab = props.currentTab || '';
 	return (
 		<div style={tabStyle}>
 			<img
-				src={currentTab === 'today' ? TodayActive : Today}
-				alt="today" onClick={props.clicked}
+				src={props.currentTab === 'today' ? TodayActive : Today}
+				alt="today" onClick={props.onTabClick}
 				data-tabname="today"
 				style={{ cursor: 'pointer' }}
 			/>
 			<img
-				src={currentTab === 'discover' ? DiscoverActive : Discover}
-				alt="discover" onClick={props.clicked}
+				src={props.currentTab === 'discover' ? DiscoverActive : Discover}
+				alt="discover" onClick={props.onTabClick}
 				data-tabname="discover"
 				style={{ cursor: 'pointer' }}
 			/>
 			<img
-				src={currentTab === 'checkins' ? CheckinsActive : Checkins}
-				alt="checkins" onClick={props.clicked}
+				src={props.currentTab === 'checkins' ? CheckinsActive : Checkins}
+				alt="checkins" onClick={props.onTabClick}
 				data-tabname="checkins"
 				style={{ cursor: 'pointer' }}
 			/>
@@ -48,4 +49,18 @@ const TabBar = props => {
 	)
 }
 
-export default TabBar;
+const mapStateToProps = state => {
+	return {
+		currentTab: state.ui.currentTab
+	}
+}
+
+const mapDispatchToProps = dispatch => {
+	return {
+		onTabClick: e => {
+			dispatch(changeTab(e.target.dataset.tabname))
+		}
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TabBar);
