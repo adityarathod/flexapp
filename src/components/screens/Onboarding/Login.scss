@@ -1,6 +1,6 @@
 // max is 550px
 
-.OnboardingLogin-title {
+.Onboarding-Login-title {
     font-family: -apple-system, BlinkMacSystemFont, 'Inter UI';
     font-size: 2rem;
     margin-bottom: 10px;
@@ -10,20 +10,15 @@
     color: black;
 }
 
-.OnboardingLogin-subtitle {
+.Onboarding-Login-subtitle {
     font-family: -apple-system, BlinkMacSystemFont, 'Inter UI';
     margin-top: 10px;
     font-size: 15px;
     color: black;
 }
 
-.OnboardingLogin-input {
+.Onboarding-Login-input {
     box-shadow: none;
-}
-
-@media screen and (min-width: 769px) {
-    .OnboardingLogin-input {
-        display: inline-block;
-        width: 300px;
-    }
+    width: 100%;
+    max-width: 500px;
 }

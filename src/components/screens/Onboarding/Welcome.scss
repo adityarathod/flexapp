@@ -1,11 +1,11 @@
-.OnboardingWelcome-buttonContainer {
+.Onboarding-Welcome-buttonContainer {
     margin-top: calc(100vh - 200px);
     position: fixed;
     z-index: 1000000;
     width: 100%;
 }
 
-.OnboardingWelcome-blueButton {
+.Onboarding-Welcome-blueButton {
     width: 85%;
     height: 49px;
     background: #007AFF;
@@ -14,18 +14,18 @@
     border-radius: 10px;
 }
 
-.OnboardingWelcome-heroBody {
+.Onboarding-Welcome-heroBody {
     justify-content: center;
 }
 
-.OnboardingWelcome-subtitle {
+.Onboarding-Welcome-subtitle {
     font-family: -apple-system, BlinkMacSystemFont, 'Inter UI';
     font-size: 2rem;
     margin-bottom: 10px;
 }
 
 @media screen and (min-width: 769px) {
-    .OnboardingWelcome-blueButton {
+    .Onboarding-Welcome-blueButton {
         width: 463px;
     }
 }
