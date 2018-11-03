@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Footer = () => (
-    <footer className="footer has-text-centered" style={{ fontFamily: "'Inter UI', sans-serif" }}>
+    <footer className="footer has-text-centered">
         <div className="columns is-mobile">
             <div className="column has-text-right"><p className="heading" style={{ fontWeight: 'bold' }}><a href="https://docs.google.com/forms/d/e/1FAIpQLSfqKsDqbSEO7Dy7JD_PkV9DhsxMYP_9pXj3qM6LRL1emIENgw/viewform?usp=sf_link">Send
 					feedback &rarr;</a></p></div>

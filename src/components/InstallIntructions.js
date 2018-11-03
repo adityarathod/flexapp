@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 
 const InstallInstructions = () => (
-    <section className="section has-background-light has-text-centered" style={{ fontFamily: "'Inter UI', sans-serif" }}>
+    <section className="section has-background-light has-text-centered">
         <h1 className="title">How to install FLEX</h1>
         <ul>
             <li>1. Open the app by clicking the button below.</li>

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ImageGrid = props => (
-	<section className="section has-text-centered" style={{ fontFamily: "'Inter UI', sans-serif" }}>
+	<section className="section has-text-centered">
 		<div className="columns">
 			{props.images.map((img, idx) => {
 				return (

@@ -18,7 +18,7 @@ const Login = () => (
 				<input type="password" className="input Onboarding-Login-input" placeholder="password" />
 				<br /> <br />
 				<br />
-				<Link to="/onboarding/loading" style={{ fontSize: '18px', fontFamily: 'Inter UI', fontWeight: '500' }}>
+				<Link to="/onboarding/loading" style={{ fontSize: '18px', fontWeight: '500' }}>
 					Login
 				</Link>
 			</div>
