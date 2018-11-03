@@ -9,7 +9,7 @@ const Onboarding = () => (
 	<React.Fragment>
 		<Route path="/onboarding/login" component={Login} />
 		<Route path="/onboarding/loading" component={Loading} />
-		<Route path="/onboarding" component={Welcome} />
+		<Route exact path="/onboarding" component={Welcome} />
 	</React.Fragment>
 )
 export default Onboarding;
