@@ -1,4 +1,4 @@
-import { NEW_APPT, DELETE_APPT, LOGIN, LOGOUT, CHANGE_TAB } from './actions';
+import { CHANGE_TAB } from './actions';
 import { Object } from 'core-js';
 
 
