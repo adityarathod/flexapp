@@ -10,7 +10,7 @@ class Home extends Component {
 			<section className="section" style={{ paddingTop: '18px' }}>
 				<div className="container">
 					<ScreenHeader subtitle="Today, July 4" title="Appointments" />
-					<div>
+					<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 						<ColorfulCard title="Appointment with Berbawy for FLEX" subtitle="Today, October 17" color="linear-gradient(125.18deg, #00cd86 0.83%, #3ab52a 98.75%)" />
 						<ColorfulCard title="Senior Class Dance Practice" subtitle="Tomorrow, October 18" color="linear-gradient(125.18deg, #FC881B 0.83%, #F22553 98.75%)" />
 						<ColorfulCard title="Chemistry and Physics Help" subtitle="Wednesday, December 20" color="linear-gradient(125.18deg, #885AFF 0.83%, #1749E5 98.75%)" />
