@@ -7,7 +7,7 @@ const initialState = {
         isLoggedIn: false,
         isLoading: false,
         error: null,
-        currentTab: 'home'
+        currentTab: 'today'
     },
     credentials: {
         username: localStorage.getItem('username') || '',
@@ -19,7 +19,9 @@ function flexApp(state = initialState, action) {
     switch (action.type) {
         case CHANGE_TAB:
             return Object.assign({}, state, {
-                currentTab: action.to
+                ui: Object.assign({}, state.ui, {
+                    currentTab: action.to
+                })
             })
         default:
             return state
