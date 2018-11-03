@@ -3,6 +3,7 @@ export const NEW_APPT = 'NEW_APPT'
 export const DELETE_APPT = 'DELETE_APPT'
 export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
+export const CHANGE_TAB = 'CHANGE_TAB'
 
 
 export function newAppt(isOffering, comment = '', teacherID, startDate, eventNum = 1) {
@@ -32,5 +33,12 @@ export function login(username, password) {
 export function logout() {
 	return {
 		type: LOGOUT
+	}
+}
+
+export function changeTab(to) {
+	return {
+		type: CHANGE_TAB,
+		to: to
 	}
 }

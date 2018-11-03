@@ -1,14 +1,28 @@
-import { NEW_APPT, DELETE_APPT, LOGIN, LOGOUT } from './actions';
+import { NEW_APPT, DELETE_APPT, LOGIN, LOGOUT, CHANGE_TAB } from './actions';
+import { Object } from 'core-js';
 
 
 const initialState = {
-    isLoggedIn: false,
-    isLoading: false,
-    username: localStorage.getItem('username') || '',
-    password: localStorage.getItem('password') || '',
-    error: ''
+    ui: {
+        isLoggedIn: false,
+        isLoading: false,
+        error: null,
+        currentTab: 'home'
+    },
+    credentials: {
+        username: localStorage.getItem('username') || '',
+        password: localStorage.getItem('password') || '',
+    },
 }
 
 function flexApp(state = initialState, action) {
-
+    switch (action.type) {
+        case CHANGE_TAB:
+            return Object.assign({}, state, {
+                currentTab: action.to
+            })
+        default:
+            return state
+    }
 }
+export default flexApp;
