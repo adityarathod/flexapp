@@ -10,7 +10,7 @@ import './Login.scss';
 class Login extends Component {
 	constructor() {
 		super()
-		this.state = { username: null, password: null }
+		this.state = { username: '', password: '' }
 	}
 	usernameChange(e) {
 		this.setState({ username: e.target.value })
