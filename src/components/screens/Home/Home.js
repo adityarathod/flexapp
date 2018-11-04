@@ -29,6 +29,12 @@ class Home extends Component {
 			return dayjs(a.start) - dayjs(b.start)
 		})
 	}
+	prettifyDate(dateStr) {
+		return dayjs(dateStr).format('dddd, MMMM D')
+	}
+	todaysDate() {
+		return this.prettifyDate(dayjs())
+	}
 	render() {
 		if (!Array.isArray(this.props.appointments)) {
 			return (
@@ -38,11 +44,14 @@ class Home extends Component {
 		return (
 			<section className="section" style={{ paddingTop: '18px' }}>
 				<div className="container">
-					<ScreenHeader subtitle="Today, July 4" title="Appointments" />
+					<ScreenHeader subtitle={this.todaysDate()} title="Appointments" />
 					<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 						{this.sortAppointments(this.props.appointments).reverse().map(appt => {
 							if (appt.title.indexOf('Checked in by') !== -1) {
-								return
+								return (
+									<React.Fragment>
+									</React.Fragment>
+								)
 							}
 							var gradient
 							if (appt.teacherEvent === 1) {
@@ -51,7 +60,7 @@ class Home extends Component {
 								gradient = 'linear-gradient(125.18deg, #00cd86 0.83%, #3ab52a 98.75%)'
 							}
 							return (
-								<ColorfulCard key={appt.uniqueID} title={this.removeStopWords(appt.title)} subtitle={appt.start} color={gradient} />
+								<ColorfulCard key={appt.uniqueID} title={this.removeStopWords(appt.title)} subtitle={this.prettifyDate(appt.start)} color={gradient} />
 							)
 						})}
 						{/* <ColorfulCard title="Appointment with Berbawy for FLEX" subtitle="Today, October 17" color="linear-gradient(125.18deg, #00cd86 0.83%, #3ab52a 98.75%)" />
