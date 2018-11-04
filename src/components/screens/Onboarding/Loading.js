@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import './Loading.scss';
 
 const Loading = props => {
-	if (Array.isArray(props.appointments) && props.credentials.username) {
+	if (props.isLoggedIn || (Array.isArray(props.appointments) && props.credentials.username !== '' && props.credentials.password !== '')) {
 		return (
 			<Redirect to="/home" />
 		)
@@ -29,7 +29,9 @@ const Loading = props => {
 const mapStateToProps = state => {
 	return {
 		credentials: state.credentials,
-		appointments: state.appointments
+		appointments: state.appointments,
+		isLoggedIn: state.isLoggedIn,
+		isLoading: state.ui.isLoading
 	}
 }
 
