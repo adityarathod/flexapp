@@ -11,7 +11,6 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAILURE = 'LOGIN_FAILURE'
 export const SAVE_CREDENTIALS = 'SAVE_CREDENTIALS'
 
-
 export const LOGOUT = 'LOGOUT'
 export const CHANGE_TAB = 'CHANGE_TAB'
 

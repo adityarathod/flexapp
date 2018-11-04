@@ -13,6 +13,7 @@ const initialState = {
         username: localStorage.getItem('username') || '',
         password: localStorage.getItem('password') || '',
     },
+    isLoggedIn: false,
     appointments: {}
 }
 
@@ -34,7 +35,8 @@ function flexApp(state = initialState, action) {
             return Object.assign({}, state, {
                 ui: Object.assign({}, state.ui, {
                     error: action.error
-                })
+                }),
+                isLoggedIn: false
             })
         case SAVE_CREDENTIALS:
             return Object.assign({}, state, {
@@ -48,6 +50,7 @@ function flexApp(state = initialState, action) {
                 ui: Object.assign({}, state.ui, {
                     error: null
                 }),
+                isLoggedIn: true,
                 appointments: action.appointments
             })
         default:
