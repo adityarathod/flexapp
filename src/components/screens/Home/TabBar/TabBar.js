@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 
 var tabStyle = {
 	position: 'fixed',
-	background: 'rgba(248, 248, 248, 0.67)',
+	background: 'rgba(248, 248, 248, 0.92)',
 	backdropFilter: 'blur(21.87px)',
 	WebkitBackdropFilter: 'blur(21.87px)',
 	left: '0px',
