@@ -1,19 +1,36 @@
 import React from 'react';
+import { Redirect } from 'react-dom';
+
+import { connect } from 'react-redux';
 
 import './Loading.scss';
 
-const Loading = () => (
-	<div className="hero is-fullheight">
-		<div className="hero-body" style={{ justifyContent: 'center' }}>
-			<div className="has-text-centered" style={{ width: '100%' }}>
-				<h1 className="title" style={{ marginBottom: '0' }}>
-					<span role="img" aria-label="an emoji">🙌</span>
-				</h1>
-				<br />
-				<span className="is-light Onboarding-Loading-loadingIndicator">Logging you in...</span>
+const Loading = props => {
+	if (props.credentials.appointments && props.credentials.username) {
+		return (
+			<Redirect to="/home" />
+		)
+	}
+	return (
+		<div className="hero is-fullheight">
+			<div className="hero-body" style={{ justifyContent: 'center' }}>
+				<div className="has-text-centered" style={{ width: '100%' }}>
+					<h1 className="title" style={{ marginBottom: '0' }}>
+						<span role="img" aria-label="an emoji">🙌</span>
+					</h1>
+					<br />
+					<span className="is-light Onboarding-Loading-loadingIndicator">Logging you in...</span>
+				</div>
 			</div>
 		</div>
-	</div>
-)
+	)
+}
 
-export default Loading;
+const mapStateToProps = state => {
+	return {
+		credentials: state.credentials,
+		appointments: state.appointments
+	}
+}
+
+export default connect(mapStateToProps, null)(Loading);
