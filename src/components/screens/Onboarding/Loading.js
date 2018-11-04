@@ -1,12 +1,12 @@
 import React from 'react';
-import { Redirect } from 'react-dom';
+import { Redirect } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
 import './Loading.scss';
 
 const Loading = props => {
-	if (props.credentials.appointments && props.credentials.username) {
+	if (Array.isArray(props.appointments) && props.credentials.username) {
 		return (
 			<Redirect to="/home" />
 		)
