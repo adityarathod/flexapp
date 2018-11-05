@@ -45,7 +45,7 @@ const TabBar = props => {
 					style={{ cursor: 'pointer' }}
 				/>
 			</Link>
-			<Link to="/home/checkin">
+			<Link to="/home/checkins">
 				<img
 					src={props.currentTab === 'checkins' ? CheckinsActive : Checkins}
 					alt="checkins" onClick={props.onTabClick}
