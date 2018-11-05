@@ -10,6 +10,8 @@ import CheckinsActive from './CheckinsActive.svg';
 import { changeTab } from '../../../../state/actions';
 import { connect } from 'react-redux';
 
+import { Link } from 'react-router-dom';
+
 var tabStyle = {
 	position: 'fixed',
 	background: 'rgba(248, 248, 248, 0.92)',
@@ -27,24 +29,30 @@ var tabStyle = {
 const TabBar = props => {
 	return (
 		<div style={tabStyle}>
-			<img
-				src={props.currentTab === 'today' ? TodayActive : Today}
-				alt="today" onClick={props.onTabClick}
-				data-tabname="today"
-				style={{ cursor: 'pointer' }}
-			/>
-			<img
-				src={props.currentTab === 'discover' ? DiscoverActive : Discover}
-				alt="discover" onClick={props.onTabClick}
-				data-tabname="discover"
-				style={{ cursor: 'pointer' }}
-			/>
-			<img
-				src={props.currentTab === 'checkins' ? CheckinsActive : Checkins}
-				alt="checkins" onClick={props.onTabClick}
-				data-tabname="checkins"
-				style={{ cursor: 'pointer' }}
-			/>
+			<Link to="/home/appointments">
+				<img
+					src={props.currentTab === 'today' ? TodayActive : Today}
+					alt="today" onClick={props.onTabClick}
+					data-tabname="today"
+					style={{ cursor: 'pointer' }}
+				/>
+			</Link>
+			<Link to="/home/discover">
+				<img
+					src={props.currentTab === 'discover' ? DiscoverActive : Discover}
+					alt="discover" onClick={props.onTabClick}
+					data-tabname="discover"
+					style={{ cursor: 'pointer' }}
+				/>
+			</Link>
+			<Link to="/home/checkin">
+				<img
+					src={props.currentTab === 'checkins' ? CheckinsActive : Checkins}
+					alt="checkins" onClick={props.onTabClick}
+					data-tabname="checkins"
+					style={{ cursor: 'pointer' }}
+				/>
+			</Link>
 		</div>
 	)
 }

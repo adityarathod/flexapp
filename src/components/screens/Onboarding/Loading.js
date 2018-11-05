@@ -8,7 +8,7 @@ import './Loading.scss';
 const Loading = props => {
 	if (props.isLoggedIn || (Array.isArray(props.appointments) && props.credentials.username !== '' && props.credentials.password !== '')) {
 		return (
-			<Redirect to="/home" />
+			<Redirect to="/home/appointments" />
 		)
 	}
 	return (
