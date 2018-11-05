@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { todaysDate } from '../../../util/util';
 import ScreenHeader from '../../ui/ScreenHeader';
-import ColorfulCard from '../../ui/ColorfulCard';
+// import ColorfulCard from '../../ui/ColorfulCard';
 import ImageCard from '../../ui/ImageCard';
 
 
