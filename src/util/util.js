@@ -17,6 +17,12 @@ export function capitalizeFirstLetter(str) {
 	return str[0].toUpperCase() + str.substring(1)
 }
 
+export function findCheckins(arr) {
+	return arr.filter(itm => {
+		return itm.title.indexOf('Checked in by') !== -1
+	})
+}
+
 export function sortAppointmentsReverse(arr) {
 	return arr.sort((a, b) => {
 		return dayjs(a.start) - dayjs(b.start)
