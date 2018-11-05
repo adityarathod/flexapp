@@ -25,7 +25,7 @@ const Welcome = props => {
 				<div className="hero-body Onboarding-Welcome-heroBody">
 					<div className="has-text-centered" style={{ width: '100%' }}>
 						<h1 className="subtitle Onboarding-Welcome-subtitle">welcome to</h1>
-						<img src="logo.svg" width="100" alt="FLEX logo" />
+						<img src="logo-noshadow.svg" width="100" alt="FLEX logo" />
 						<br />
 						<br />
 						<br />
