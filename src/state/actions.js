@@ -19,6 +19,8 @@ export const OFFERINGS_SUCCESS = 'OFFERINGS_SUCCESS'
 export const LOGOUT = 'LOGOUT'
 export const CHANGE_TAB = 'CHANGE_TAB'
 
+const API_ROOT = 'https://flextimes.herokuapp.com'
+
 
 export function newAppt(isOffering, comment = '', teacherID, startDate, eventNum = 1) {
 	return {
@@ -49,7 +51,7 @@ export function saveCredentials(credentials) {
 export function login(credentials) {
 	return dispatch => {
 		dispatch(loginIsLoading(true))
-		fetch('https://flextimes.herokuapp.com/irvington/appointments', {
+		fetch(`${API_ROOT}/irvington/appointments`, {
 			method: 'POST',
 			headers: {
 				'Accept': 'application/json',
