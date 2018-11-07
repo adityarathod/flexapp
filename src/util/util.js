@@ -36,3 +36,10 @@ export function prettifyDate(dateStr) {
 export function todaysDate() {
 	return prettifyDate(dayjs())
 }
+
+export function prettifyCheckin(checkin, date) {
+	var time = checkin.split(' -')[1]
+	var timeObj = dayjs(date + ' ' + time)
+	var timeFormatted = timeObj.format('h:mm a') + '.'
+	return checkin.replace('-', 'checked you in at ').replace('for Flex Time', '').replace('Checked in by ', '').replace(time, timeFormatted)
+}
