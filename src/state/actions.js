@@ -11,6 +11,11 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAILURE = 'LOGIN_FAILURE'
 export const SAVE_CREDENTIALS = 'SAVE_CREDENTIALS'
 
+
+export const GET_OFFERINGS = 'GET_OFFERINGS'
+export const OFFERINGS_LOADING = 'OFFERINGS_LOADING'
+export const OFFERINGS_SUCCESS = 'OFFERINGS_SUCCESS'
+
 export const LOGOUT = 'LOGOUT'
 export const CHANGE_TAB = 'CHANGE_TAB'
 
@@ -70,6 +75,13 @@ export function login(credentials) {
 				dispatch(loginSuccess(json))
 			})
 			.catch(() => { })
+	}
+}
+
+export function getOfferings(credentials) {
+	return dispatch => {
+		dispatch()
+		fetch()
 	}
 }
 
