@@ -13,13 +13,15 @@ export const SAVE_CREDENTIALS = 'SAVE_CREDENTIALS'
 
 
 export const GET_OFFERINGS = 'GET_OFFERINGS'
-export const OFFERINGS_LOADING = 'OFFERINGS_LOADING'
+export const OFFERINGS_IS_LOADING = 'OFFERINGS_IS_LOADING'
 export const OFFERINGS_SUCCESS = 'OFFERINGS_SUCCESS'
+export const OFFERINGS_FAILURE = 'OFFERINGS_FAILURE'
+
 
 export const LOGOUT = 'LOGOUT'
 export const CHANGE_TAB = 'CHANGE_TAB'
 
-const API_ROOT = 'https://flextimes.herokuapp.com'
+const API_ROOT = 'https://wt-5b6fb8d8dc5ef6c9a0355e2c6a1396d2-0.sandbox.auth0-extend.com/flexapi'
 
 
 export function newAppt(isOffering, comment = '', teacherID, startDate, eventNum = 1) {
@@ -74,6 +76,7 @@ export function login(credentials) {
 					throw Error(json.error)
 				}
 				dispatch(saveCredentials(credentials))
+				dispatch(getOfferings(credentials))
 				dispatch(loginSuccess(json))
 			})
 			.catch(() => { })
@@ -82,10 +85,54 @@ export function login(credentials) {
 
 export function getOfferings(credentials) {
 	return dispatch => {
-		dispatch()
-		fetch()
+		dispatch(offeringsIsLoading(true))
+		fetch(`${API_ROOT}/irvington/offerings`, {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(credentials)
+		}).then(res => {
+			if (!res.ok) {
+				dispatch(offeringsFailure(res.statusText))
+				throw Error(res.statusText)
+			}
+			return res
+		})
+			.then(res => res.json())
+			.then(json => {
+				if ('error' in json) {
+					dispatch(offeringsFailure(json.error))
+					throw Error(json.error)
+				}
+				dispatch(offeringsSuccess(json))
+			})
+			.catch(() => { })
 	}
 }
+
+export function offeringsIsLoading(bool) {
+	return {
+		type: OFFERINGS_IS_LOADING,
+		isLoading: bool
+	}
+}
+
+export function offeringsSuccess(offerings) {
+	return {
+		type: OFFERINGS_SUCCESS,
+		offerings: offerings
+	}
+}
+
+export function offeringsFailure(error) {
+	return {
+		type: OFFERINGS_FAILURE,
+		error: error
+	}
+}
+
 
 export function loginIsLoading(bool) {
 	return {
@@ -113,7 +160,6 @@ export function logout() {
 		type: LOGOUT
 	}
 }
-
 export function changeTab(to) {
 	return {
 		type: CHANGE_TAB,

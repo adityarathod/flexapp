@@ -13,6 +13,10 @@ export function formatApptName(value) {
 	return capitalizeFirstLetter(result.trim())
 }
 
+export function formatOfferingName(value) {
+	return formatApptName(value).replace(' for FLEX', '')
+}
+
 export function capitalizeFirstLetter(str) {
 	return str[0].toUpperCase() + str.substring(1)
 }
@@ -27,6 +31,12 @@ export function sortAppointmentsReverse(arr) {
 	return arr.sort((a, b) => {
 		return dayjs(a.start) - dayjs(b.start)
 	}).reverse()
+}
+
+export function sortOfferingsReverse(arr) {
+	return arr.sort((a, b) => {
+		return dayjs(a.offeringDate) - dayjs(b.offeringDate)
+	})
 }
 
 export function prettifyDate(dateStr) {

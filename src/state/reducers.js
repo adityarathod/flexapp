@@ -1,4 +1,13 @@
-import { LOGIN_IS_LOADING, LOGIN_SUCCESS, CHANGE_TAB, LOGIN_FAILURE, SAVE_CREDENTIALS } from './actions';
+import {
+    LOGIN_IS_LOADING,
+    OFFERINGS_IS_LOADING,
+    OFFERINGS_SUCCESS,
+    LOGIN_SUCCESS,
+    CHANGE_TAB,
+    LOGIN_FAILURE,
+    OFFERINGS_FAILURE,
+    SAVE_CREDENTIALS
+} from './actions';
 import { Object } from 'core-js';
 
 
@@ -14,6 +23,8 @@ const initialState = {
         password: localStorage.getItem('password') || '',
     },
     isLoggedIn: false,
+    loadingOfferings: false,
+    offerings: [],
     appointments: {}
 }
 
@@ -25,12 +36,17 @@ function flexApp(state = initialState, action) {
                     currentTab: action.to
                 })
             })
+        case OFFERINGS_IS_LOADING:
+            return Object.assign({}, state, {
+                loadingOfferings: true
+            })
         case LOGIN_IS_LOADING:
             return Object.assign({}, state, {
                 ui: Object.assign({}, state.ui, {
                     isLoading: action.isLoading
                 })
             })
+        case OFFERINGS_FAILURE:
         case LOGIN_FAILURE:
             return Object.assign({}, state, {
                 ui: Object.assign({}, state.ui, {
@@ -52,6 +68,11 @@ function flexApp(state = initialState, action) {
                 }),
                 isLoggedIn: true,
                 appointments: action.appointments
+            })
+        case OFFERINGS_SUCCESS:
+            return Object.assign({}, state, {
+                offerings: action.offerings,
+                loadingOfferings: false
             })
         default:
             return state
