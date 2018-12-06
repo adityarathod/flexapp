@@ -35,7 +35,7 @@ class Discover extends Component {
 						{sortOfferingsReverse(this.props.offerings.map(off => {
 							var numAvailable = parseInt(off.offeringCap) - off.numAppts
 							var displayString = isNaN(numAvailable) ? ` • Available` : ` • ${numAvailable} spots left`
-							return <ColorfulCard key={off.uniqueID} title={off.name + ' with ' + off.teacherLast} subtitle={prettifyDate(off.offeringDate) + displayString} color="linear-gradient(125.18deg, #885AFF 0.83%, #1749E5 98.75%)" />
+							return <ColorfulCard key={off.uniqueID} title={off.offering + ' with ' + off.teacherLast} subtitle={prettifyDate(off.offeringDate) + displayString} color="linear-gradient(125.18deg, #885AFF 0.83%, #1749E5 98.75%)" />
 						}))}
 					</div>
 				</div>
