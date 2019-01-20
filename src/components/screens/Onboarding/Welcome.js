@@ -8,9 +8,7 @@ import './Welcome.scss';
 
 const Welcome = props => {
 	if (props.credentials.username && props.credentials.password) {
-		return (
-			<Redirect to="/onboarding/login" />
-		)
+		props.gotoNext();
 	}
 	return (
 		<React.Fragment>

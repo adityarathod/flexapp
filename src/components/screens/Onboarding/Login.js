@@ -33,9 +33,7 @@ class Login extends Component {
 	}
 	render() {
 		if (this.props.isLoading) {
-			return (
-				<Redirect to="/onboarding/loading" />
-			)
+			this.props.gotoNext();
 		}
 		return (
 			<div className="hero is-fullheight">
