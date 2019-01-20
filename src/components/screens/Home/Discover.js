@@ -24,7 +24,7 @@ class Discover extends Component {
 	render() {
 		if (!Array.isArray(this.props.appointments)) {
 			return (
-				<Redirect to="/onboarding/login" />
+				<Redirect to="/onboarding" />
 			)
 		}
 		return (
@@ -34,9 +34,10 @@ class Discover extends Component {
 					<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 						{sortOfferingsReverse(this.props.offerings.map(off => {
 							var numAvailable = parseInt(off.offeringCap) - off.numAppts
-							var displayString = isNaN(numAvailable) ? ` • Available` : ` • ${numAvailable} spots left`
-							return <ColorfulCard key={off.uniqueID} title={off.offering + ' with ' + off.teacherLast} subtitle={prettifyDate(off.offeringDate) + displayString} color="linear-gradient(125.18deg, #885AFF 0.83%, #1749E5 98.75%)" />
+							var displayString = isNaN(numAvailable) ? ` • Available` : ` • ${numAvailable} spots`
+							return <ColorfulCard key={off.uniqueID || new Date().toString()} title={off.offering + ' with ' + off.teacherLast} subtitle={prettifyDate(off.offeringDate) + displayString} color="linear-gradient(125.18deg, #885AFF 0.83%, #1749E5 98.75%)" />
 						}))}
+						{this.props.offerings.length === 0 ? <a className="button is-large is-warning is-loading" style={{ border: 'none', background: 'none' }}>Loading</a> : null}
 					</div>
 				</div>
 			</section>
