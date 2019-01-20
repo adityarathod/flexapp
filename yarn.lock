@@ -8195,6 +8195,11 @@ react-scripts@2.0.3:
   optionalDependencies:
     fsevents "1.2.4"
 
+react-sequence@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/react-sequence/-/react-sequence-0.2.2.tgz#b822d70b266343d8a108f5ce28dba695786bc67f"
+  integrity sha1-uCLXCyZjQ9ihCPXOKNumlXhrxn8=
+
 react@^16.5.2:
   version "16.5.2"
   resolved "https://registry.yarnpkg.com/react/-/react-16.5.2.tgz#19f6b444ed139baa45609eee6dc3d318b3895d42"
